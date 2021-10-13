@@ -19,4 +19,8 @@ class homeController extends Controller
 
         return response($results);
     }
+
+    public function show(Request $request) {
+        dd($request->id);
+    }
 }

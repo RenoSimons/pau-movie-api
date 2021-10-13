@@ -14,4 +14,7 @@ use App\Http\Controllers\homeController;
 */
 
 Route::get('/', [homeController::class, 'index']);
+
 Route::post('/search', [homeController::class, 'search']);
+
+Route::get('/show/{id}', [homeController::class, 'show'])->name('show');

@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import ReactDOM from 'react-dom';
 import axios from "axios";
-import { Inertia } from '@inertiajs/inertia'
 
 import InputField from '../components/Inputfield';
+import ShowCard from '../components/ShowCard';
 
 function Home() {
     let [userInput, setUserInput] = useState("");
@@ -22,7 +22,7 @@ function Home() {
             (error) => {
                 console.log(error)
                 setHasError(error);
-                });
+            });
     }
 
     return (
@@ -41,7 +41,7 @@ function Home() {
                     <div>
                         <ul>
                             {results.map((result) => {
-                                return (<li key={result.id}><span>{result.score}</span></li>)
+                                return (<ShowCard data={result}/>)
                             })}
 
                         </ul>
