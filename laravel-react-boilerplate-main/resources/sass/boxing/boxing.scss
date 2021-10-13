@@ -1,0 +1,22 @@
+$gaps: 100;
+$gap: 1px;
+
+@for $i from 0 to $gaps {
+    .mt--#{$i} { margin-top: var(--gap--#{$i}); }
+    .mb--#{$i} { margin-bottom: var(--gap--#{$i}); }
+    .ml--#{$i} { margin-left: var(--gap--#{$i}); }
+    .mr--#{$i} { margin-right: var(--gap--#{$i}); }
+
+    .mx--#{$i} { margin-left: var(--gap--#{$i}); margin-right: var(--gap--#{$i}); }
+    .my--#{$i} { margin-bottom: var(--gap--#{$i}); margin-top: var(--gap--#{$i}); }
+
+    .pt--#{$i} { padding-top: var(--gap--#{$i}); }
+    .pb--#{$i} { padding-bottom: var(--gap--#{$i}); }
+    .pl--#{$i} { padding-left: var(--gap--#{$i}); }
+    .pr--#{$i} { padding-right: var(--gap--#{$i}); }
+
+    .px--#{$i} { padding-left: var(--gap--#{$i}); padding-right: var(--gap--#{$i}); }
+    .py--#{$i} { padding-bottom: var(--gap--#{$i}); padding-top: var(--gap--#{$i}); }
+}
+.mx--auto { margin-left: auto; margin-right: auto; }
+.m--auto { margin: auto; }
