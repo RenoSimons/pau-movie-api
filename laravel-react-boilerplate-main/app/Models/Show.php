@@ -16,4 +16,10 @@ class Show extends Model
 
         return $response->failed() ? null : $response;
     }
+
+    public static function getShow($id) {
+        $response = Http::get('https://api.tvmaze.com/shows/' . $id);
+
+        return $response->failed() ? null : $response;
+    }
 }

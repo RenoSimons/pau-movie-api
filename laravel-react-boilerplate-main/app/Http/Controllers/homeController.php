@@ -21,6 +21,9 @@ class homeController extends Controller
     }
 
     public function show(Request $request) {
-        dd($request->id);
+        $show = Show::getShow($request->id);
+        $show = $show->json();
+
+        return inertia('Show', ['showData' => $show]);
     }
 }
