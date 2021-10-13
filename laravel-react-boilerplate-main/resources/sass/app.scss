@@ -1,11 +1,21 @@
 // Fonts
 @import url('https://fonts.googleapis.com/css?family=Nunito');
 
-// Variables
 @import 'variables';
 @import './components/showCard.scss';
 @import './buttons/buttons.scss';
 @import './boxing/boxing.scss';
+@import './pages/home.scss';
+
+:root {
+    @each $name, $color in $colors {
+        --color--#{$name}: #{$color};
+    }
+}
 
 // Bootstrap
 @import '~bootstrap/scss/bootstrap';
+
+body {
+    background-color: var(--color--lightdark);
+}

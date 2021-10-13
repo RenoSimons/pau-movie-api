@@ -10,8 +10,7 @@ function InputField(props) {
 
     return (
         <div>
-            <label>Search</label>
-            <input onChange={inputChange} autoComplete="off" type="text" placeholder="Enter a show"/>
+            <input onChange={inputChange} className="search-input" autoComplete="off" type="text" placeholder="Enter a show" required/>
         </div>
     );
 }

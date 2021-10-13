@@ -8,7 +8,8 @@ import ShowCard from '../components/ShowCard';
 function Home() {
     let [userInput, setUserInput] = useState("");
     let [hasError, setHasError] = useState(false);
-    let [results, setResults] = useState(false);
+    let [results, setResults] = useState();
+    let [hasSearched, setHasSearched] = useState(false);
 
     const handleSubmit = (e) => {
         e.preventDefault()
@@ -17,6 +18,7 @@ function Home() {
         axios.post('http://127.0.0.1:8000/search', { userInput })
             .then(response => {
                 setResults(response.data);
+                setHasSearched(true);
                 console.log(results)
             },
             (error) => {
@@ -26,18 +28,21 @@ function Home() {
     }
 
     return (
-        <div className="container">
-            <h1>Home</h1>
-
-            <h1>Search</h1>
-
-            <form action="#" onSubmit={handleSubmit}>
-                <InputField onInputUpdated={setUserInput} />
-                <button type="submit">Search</button>
-            </form>
-
+        <div className="container" id="homepage">
+            <div className="header fc--secondary d-flex align-items-center justify-content-between">
+                <div>
+                    <h1 className="m-0">Show finder</h1>
+                </div>
+                <div>
+                    <form action="#" onSubmit={handleSubmit} className="d-flex align-items-center ml-3">
+                        <InputField onInputUpdated={setUserInput} />
+                        <button className="search-btn ml-3" type="submit">Search</button>
+                    </form>
+                </div>
+            </div>
             <div className="results">
-                {results ?
+                {hasSearched ? 
+                    results.length > 0 ?
                     <div>
                         <ul>
                             {results.map((result) => {
@@ -46,10 +51,8 @@ function Home() {
 
                         </ul>
                     </div>
-                    : <span>No results</span>
-                }
-
-          
+                    : <h4 className="fc--secondary">No results found...</h4>
+                : ""}
             </div>
         </div>
     );

@@ -10,6 +10,7 @@ $line-height-base: 1.6;
 $colors: (
     'primary': #121212,
     'secondary': #F5C518,
+    'lightdark': #312f2f,
 );
 
 @each $name, $color in $colors {
