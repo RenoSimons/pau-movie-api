@@ -35,6 +35,8 @@
   height: 38px;
   padding: 5px 20px;
   border-radius: 5px;
+  text-decoration: none;
+  color: black;
 }
 
 .save-btn {
@@ -50,26 +52,30 @@
   transform: scale(1.2);
 }
 
+.save-btn:focus {
+  content: "omg";
+}
+
 #homepage {
   background-color: var(--color--primary);
-}
-#homepage .header {
+  color: var(--color--secondary);
   padding: 30px;
+  height: 100%;
 }
-#homepage .header input {
-  border-radius: 5px;
-  padding: 7.5px;
-  border: none;
-}
-#homepage .results ul {
+#homepage ul {
   padding: 0;
   list-style: none;
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
 }
-#homepage .results ul li {
+#homepage ul li {
   margin-top: 15px;
+}
+#homepage .header input {
+  border-radius: 5px;
+  padding: 7.5px;
+  border: none;
 }
 
 .episode-list {
@@ -81,6 +87,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  width: 100%;
 }
 .episode-list .episode-list-item p {
   margin: 0;

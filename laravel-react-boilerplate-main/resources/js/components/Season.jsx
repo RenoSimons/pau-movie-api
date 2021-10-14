@@ -1,6 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import ReactDOM from 'react-dom';
-import { Link } from '@inertiajs/inertia-react'
 import { useForm } from '@inertiajs/inertia-react'
 
 function Season(props) {
@@ -13,7 +11,7 @@ function Season(props) {
 
     const saveEpisode = (e) => {
         e.preventDefault()
-        post('/show/seasons/episodesave')
+        post('/show/seasons/episodesave', preserveScroll)
     }
 
     return (

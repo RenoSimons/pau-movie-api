@@ -13,7 +13,7 @@ use App\Http\Controllers\homeController;
 |
 */
 
-Route::get('/', [homeController::class, 'index']);
+Route::get('/', [homeController::class, 'index'])->name('index');
 
 Route::post('/search', [homeController::class, 'search']);
 

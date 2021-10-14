@@ -5,7 +5,7 @@ import axios from "axios";
 import InputField from '../components/Inputfield';
 import ShowCard from '../components/ShowCard';
 
-function Home() {
+function Home(props) {
     let [userInput, setUserInput] = useState("");
     let [hasError, setHasError] = useState(false);
     let [results, setResults] = useState();
@@ -55,6 +55,20 @@ function Home() {
                 : ""}
 
                 {hasError ? hasError : ""}
+            </div>
+            <div className="favorites mt-3">
+                <h1>Your favorite episodes</h1>
+                {props.favorites  ? 
+                    <ul>
+                        {props.favorites.map((favorite) => {
+                            return <li>
+                                <p>{favorite.name}</p>
+                                <img src={favorite.image.medium} alt="episode image" />
+                            </li>
+                        })}
+                    </ul>
+                    : "No favorites yet"
+                }
             </div>
         </div>
     );

@@ -12,7 +12,8 @@ class homeController extends Controller
 {
     public function index()
     {
-        return inertia('Home');
+        $favorites = Episode::getFavorites();
+        return inertia('Home', ['favorites' => $favorites]);
     }
 
     public function search(Request $request) {
@@ -37,11 +38,11 @@ class homeController extends Controller
 
         if ($validator->fails()) {
             return redirect()->route('show');
-        } else {
-            Episode::checkIfEpisodeIsFavorite($request->id);
-            Episode::create(['episode_id' => $request->id]);
-            return back();
-        }
+        } 
         
+        if (! Episode::checkIfEpisodeIsFavorite($request->id) ) {
+            Episode::create(['episode_id' => $request->id]);
+        };
+        return back();
     }
 }

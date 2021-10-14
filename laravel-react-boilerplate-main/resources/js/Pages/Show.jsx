@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import ReactDOM from 'react-dom';
 import Season from "../components/Season";
+import { Link } from '@inertiajs/inertia-react'
 
 function Show(props) {
 
@@ -14,7 +15,7 @@ function Show(props) {
                     <h1 className="m-0">Show details</h1>
                 </div>
                 <div>
-                    <button className="search-btn ml-3" type="submit">Back</button>
+                    <Link className="search-btn ml-3" href={route('index')}>Back</Link>
                 </div>
             </div>
             <div className="showCard">
