@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateEpisodesTable extends Migration
+class CreateShowsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,8 @@ class CreateEpisodesTable extends Migration
      */
     public function up()
     {
-        Schema::create('episodes', function (Blueprint $table) {
+        Schema::create('shows', function (Blueprint $table) {
             $table->id();
-            $table->integer('episode_id');
             $table->integer('show_id');
         });
     }
@@ -27,6 +26,6 @@ class CreateEpisodesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('episodes');
+        Schema::dropIfExists('shows');
     }
 }

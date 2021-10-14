@@ -46,7 +46,7 @@ function Home(props) {
                         <span className="fc--secondary">Search results for '{userInput}':</span>
                         <ul>
                             {results.map((result) => {
-                                return (<ShowCard data={result}/>)
+                                return (<ShowCard data={result.show}/>)
                             })}
 
                         </ul>
@@ -57,14 +57,11 @@ function Home(props) {
                 {hasError ? hasError : ""}
             </div>
             <div className="favorites mt-3">
-                <h1>Your favorite episodes</h1>
+                <h1>Your favorite shows</h1>
                 {props.favorites  ? 
                     <ul>
                         {props.favorites.map((favorite) => {
-                            return <li>
-                                <p>{favorite.name}</p>
-                                <img src={favorite.image.medium} alt="episode image" />
-                            </li>
+                            return (<ShowCard data={favorite}/>)
                         })}
                     </ul>
                     : "No favorites yet"

@@ -3089,7 +3089,7 @@ function Home(props) {
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("ul", {
           children: results.map(function (result) {
             return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_components_ShowCard__WEBPACK_IMPORTED_MODULE_4__["default"], {
-              data: result
+              data: result.show
             });
           })
         })]
@@ -3100,16 +3100,11 @@ function Home(props) {
     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
       className: "favorites mt-3",
       children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("h1", {
-        children: "Your favorite episodes"
+        children: "Your favorite shows"
       }), props.favorites ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("ul", {
         children: props.favorites.map(function (favorite) {
-          return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("li", {
-            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("p", {
-              children: favorite.name
-            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("img", {
-              src: favorite.image.medium,
-              alt: "episode image"
-            })]
+          return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_components_ShowCard__WEBPACK_IMPORTED_MODULE_4__["default"], {
+            data: favorite
           });
         })
       }) : "No favorites yet"]
@@ -3145,8 +3140,23 @@ __webpack_require__.r(__webpack_exports__);
 
 
 function Show(props) {
-  var data = props.showData;
+  var showdata = props.showData;
   var seasons = props.episodeData;
+
+  var _useForm = (0,_inertiajs_inertia_react__WEBPACK_IMPORTED_MODULE_3__.useForm)({
+    id: ''
+  }),
+      data = _useForm.data,
+      setData = _useForm.setData,
+      post = _useForm.post,
+      processing = _useForm.processing,
+      errors = _useForm.errors;
+
+  var saveShow = function saveShow(e) {
+    e.preventDefault();
+    post('/show/seasons/showsave');
+  };
+
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
     className: "container",
     id: "homepage",
@@ -3168,45 +3178,74 @@ function Show(props) {
       className: "showCard",
       children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
         className: "d-md-flex",
-        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
           className: "col-md-4",
-          children: data.image ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("img", {
+          children: [showdata.image ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("img", {
             className: "mt-3",
-            src: data.image.medium
-          }) : ""
+            src: showdata.image.medium
+          }) : "", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("form", {
+            onSubmit: saveShow,
+            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("button", {
+              type: "submit",
+              className: "search-btn mt-3",
+              value: data.id,
+              id: showdata.id,
+              onClick: function onClick(e) {
+                return setData('id', e.target.id);
+              },
+              children: "Save show to favorites"
+            })
+          })]
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
           className: "col-md-4",
           children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("h2", {
-            children: data.name
+            children: showdata.name
           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("p", {
-            children: ["Language: ", data.language]
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("p", {
-            className: "mt-3",
-            children: ["Premiered: ", data.premiered]
+            children: ["Language: ", showdata.language]
           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("p", {
             className: "mt-3",
-            children: ["Ended: ", data.ended]
+            children: ["Premiered: ", showdata.premiered]
           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("p", {
             className: "mt-3",
-            children: ["Genres: ", data.genres.map(function (genre) {
+            children: ["Ended: ", showdata.ended]
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("p", {
+            className: "mt-3",
+            children: ["Genres: ", showdata.genres.map(function (genre) {
               return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("span", {
                 children: [" ", genre]
               });
             })]
           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("p", {
             className: "mt-3",
-            children: ["Rating: ", data.rating.average]
+            children: ["Rating: ", showdata.rating.average]
           })]
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
           className: "col-md-4",
           children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("p", {
-            children: data.summary
+            children: showdata.summary
           })
         })]
       })
     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
+      children: [console.log(props.seenEpisodes), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("h1", {
+        className: "fc--secondary py-4 ",
+        children: ["Seen episodes for ", showdata.name]
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
+        className: "d-flex flex-wrap",
+        children: props.seenEpisodes ? props.seenEpisodes.map(function (episode, index) {
+          return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
+            className: "col-md-4",
+            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("p", {
+              children: episode.name
+            })
+          });
+        }) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("p", {
+          children: "No episodes seen yet"
+        })
+      })]
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
       children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("h1", {
-        className: "fc--secondary p-4",
+        className: "fc--secondary py-4",
         children: "Seasons and episodes"
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
         className: "d-flex flex-wrap",
@@ -3216,7 +3255,8 @@ function Show(props) {
             children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("h4", {
               children: ["Season ", index + 1]
             }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_components_Season__WEBPACK_IMPORTED_MODULE_2__["default"], {
-              data: season
+              data: season,
+              id: showdata.id
             }, season.id)]
           });
         })
@@ -3336,7 +3376,8 @@ function Season(props) {
   var seasondata = props.data;
 
   var _useForm = (0,_inertiajs_inertia_react__WEBPACK_IMPORTED_MODULE_1__.useForm)({
-    id: ''
+    id: '',
+    show_id: props.id
   }),
       data = _useForm.data,
       setData = _useForm.setData,
@@ -3346,7 +3387,9 @@ function Season(props) {
 
   var saveEpisode = function saveEpisode(e) {
     e.preventDefault();
-    post('/show/seasons/episodesave', preserveScroll);
+    post('/show/seasons/episodesave', {
+      preserveScroll: true
+    });
   };
 
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
@@ -3357,7 +3400,7 @@ function Season(props) {
           className: "episode-list-item",
           children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("p", {
             children: episode.name
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("form", {
+          }), console.log(episode), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("form", {
             onSubmit: saveEpisode,
             children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("button", {
               type: "submit",
@@ -3367,7 +3410,7 @@ function Season(props) {
               onClick: function onClick(e) {
                 return setData('id', e.target.id);
               },
-              children: "Save"
+              children: "Seen"
             })
           })]
         }, index);
@@ -3404,12 +3447,12 @@ __webpack_require__.r(__webpack_exports__);
 function ShowCard(props) {
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.Fragment, {
     children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("li", {
-      children: props.data.show.image ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_inertiajs_inertia_react__WEBPACK_IMPORTED_MODULE_2__.Link, {
+      children: props.data.image ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_inertiajs_inertia_react__WEBPACK_IMPORTED_MODULE_2__.Link, {
         href: route('show', {
-          id: props.data.show.id
+          id: props.data.id
         }),
         children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("img", {
-          src: props.data.show.image.medium
+          src: props.data.image.medium
         })
       }) : ""
     })

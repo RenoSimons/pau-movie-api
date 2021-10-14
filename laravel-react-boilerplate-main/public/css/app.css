@@ -60,14 +60,14 @@
   background-color: var(--color--primary);
   color: var(--color--secondary);
   padding: 30px;
-  height: 100%;
+  min-height: 100vh;
 }
 #homepage ul {
   padding: 0;
   list-style: none;
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-between;
+  align-items: flex-start;
 }
 #homepage ul li {
   margin-top: 15px;

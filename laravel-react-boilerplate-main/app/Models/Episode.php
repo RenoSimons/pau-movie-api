@@ -13,26 +13,30 @@ class Episode extends Model
 
     protected $fillable = [
         'episode_id',
+        'show_id'
     ];
 
     public $timestamps = false;
 
-    public static function getFavorites() {
-        $ids = DB::table('episodes')->select('episode_id')->get();
-        $favorites = [];
+    public static function getSeenEpisodes($showid) {
         
+        $ids = DB::table('episodes')
+        ->where('show_id', $showid)
+        ->select('episode_id')
+        ->get();
+        $episodes = [];
+
         foreach($ids as $id) {
             $response = Http::get('https://api.tvmaze.com/episodes/' . $id->episode_id)->json();
-            array_push($favorites, $response);
+            array_push($episodes, $response);
         }
-
-        return count($favorites) > 0 ? $favorites : null;
+        
+        return count($episodes) > 0 ? $episodes : null;
     }
 
-
     public static function checkIfEpisodeIsFavorite($id) {
-        $result = Episode::where('id', $id);
+        $result = Episode::where('episode_id', $id)->get();
 
-        return $result;
+        return count($result) > 0 ? $result : null;
     }
 }
