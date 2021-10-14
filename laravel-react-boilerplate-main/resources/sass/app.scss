@@ -6,6 +6,7 @@
 @import './buttons/buttons.scss';
 @import './boxing/boxing.scss';
 @import './pages/home.scss';
+@import './pages/detail.scss';
 
 :root {
     @each $name, $color in $colors {

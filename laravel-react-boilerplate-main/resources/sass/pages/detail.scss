@@ -1,0 +1,28 @@
+.episode-list {
+    list-style: none;
+    padding:0;
+
+    .episode-list-item {
+        color: var(--color--secondary);
+        display:flex;
+        justify-content: space-between;
+        align-items: center;
+
+        p {
+            margin: 0;
+        }
+
+        .favorite {
+            display:none;
+        }
+
+        &:hover {
+            padding: 3px;
+            font-weight:bold;
+
+            .favorite {
+                display: flex;
+            }
+        }
+    }
+}

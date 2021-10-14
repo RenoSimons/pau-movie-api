@@ -15,15 +15,16 @@ class homeController extends Controller
 
     public function search(Request $request) {
         $results = Show::searchShow($request->input('userInput'));
-        $results = $results->json();
 
         return response($results);
     }
 
     public function show(Request $request) {
         $show = Show::getShow($request->id);
-        $show = $show->json();
+        $show_episodes = Show::getSeasonWithEpisodes($request->id);
 
-        return inertia('Show', ['showData' => $show]);
+        return inertia('Show', 
+        ['showData' => $show,
+        'episodeData' => $show_episodes]);
     }
 }

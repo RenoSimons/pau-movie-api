@@ -22,7 +22,6 @@ function Home() {
                 console.log(results)
             },
             (error) => {
-                console.log(error)
                 setHasError(error);
             });
     }
@@ -44,6 +43,7 @@ function Home() {
                 {hasSearched ? 
                     results.length > 0 ?
                     <div>
+                        <span className="fc--secondary">Search results for '{userInput}':</span>
                         <ul>
                             {results.map((result) => {
                                 return (<ShowCard data={result}/>)
@@ -53,6 +53,8 @@ function Home() {
                     </div>
                     : <h4 className="fc--secondary">No results found...</h4>
                 : ""}
+
+                {hasError ? hasError : ""}
             </div>
         </div>
     );
