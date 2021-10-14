@@ -18,3 +18,5 @@ Route::get('/', [homeController::class, 'index']);
 Route::post('/search', [homeController::class, 'search']);
 
 Route::get('/show/{id}', [homeController::class, 'show'])->name('show');
+
+Route::post('/show/seasons/episodesave', [homeController::class, 'saveEpisode'])->name('episodesave');

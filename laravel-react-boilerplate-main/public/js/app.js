@@ -3318,25 +3318,42 @@ __webpack_require__.r(__webpack_exports__);
 
 
 function Season(props) {
-  var data = props.data;
+  var seasondata = props.data;
+
+  var _useForm = (0,_inertiajs_inertia_react__WEBPACK_IMPORTED_MODULE_2__.useForm)({
+    id: ''
+  }),
+      data = _useForm.data,
+      setData = _useForm.setData,
+      post = _useForm.post,
+      processing = _useForm.processing,
+      errors = _useForm.errors;
 
   var saveEpisode = function saveEpisode(e) {
-    console.log(e.target.id);
+    e.preventDefault();
+    post('/show/seasons/episodesave');
   };
 
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
     children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("ul", {
       className: "episode-list",
-      children: data.episodes.map(function (episode, index) {
+      children: seasondata.episodes.map(function (episode, index) {
         return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("li", {
           className: "episode-list-item",
           children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("p", {
             children: episode.name
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("p", {
-            className: "favorite save-btn",
-            id: episode.id,
-            onClick: saveEpisode,
-            children: "Save"
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("form", {
+            onSubmit: saveEpisode,
+            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("button", {
+              type: "submit",
+              className: "favorite save-btn",
+              value: data.id,
+              id: episode.id,
+              onClick: function onClick(e) {
+                return setData('id', e.target.id);
+              },
+              children: "Save"
+            })
           })]
         }, index);
       })

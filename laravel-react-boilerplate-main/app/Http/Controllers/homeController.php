@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 use App\Models\Show;
+use App\Models\Episode;
+use Illuminate\Support\Facades\Validator;
 
 class homeController extends Controller
 {
@@ -26,5 +28,20 @@ class homeController extends Controller
         return inertia('Show', 
         ['showData' => $show,
         'episodeData' => $show_episodes]);
+    }
+
+    public function saveEpisode(Request $request) {
+        $validator =  Validator::make($request->all(),[
+            'id' => 'required|integer',
+        ]);
+
+        if ($validator->fails()) {
+            return redirect()->route('show');
+        } else {
+            Episode::checkIfEpisodeIsFavorite($request->id);
+            Episode::create(['episode_id' => $request->id]);
+            return back();
+        }
+        
     }
 }
