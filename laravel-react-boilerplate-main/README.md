@@ -15,4 +15,4 @@
 - Guzzlehttp for laravel api calls
 - Jquery
 - sass
-- Bootstrap -> no prefab components used, only flex and grid system for efficient development
+- Bootstrap -> no prefab components used, only flex, margins & paddings, and grid system for efficient development
