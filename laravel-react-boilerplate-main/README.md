@@ -1,5 +1,6 @@
 ## Install instructions
 - Clone the repo
+- cd to the project root
 - composer install
 - npm i
 - make .env file and add DB credentials
