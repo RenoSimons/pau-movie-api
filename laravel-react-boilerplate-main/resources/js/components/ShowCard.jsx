@@ -7,7 +7,10 @@ function ShowCard(props) {
         <>
             <li>{props.data.image ? 
                 <Link href={route('show', {id: props.data.id})}>
+                    <div className="no-overflow">
                     <img className="thumbnail" src={props.data.image.medium}></img>
+                    </div>
+                    
                 </Link> : ""}
             </li>
         </>

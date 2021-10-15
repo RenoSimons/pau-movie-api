@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useForm } from '@inertiajs/inertia-react'
+import $ from 'jquery'; 
 
 function Season(props) {
 
@@ -25,7 +26,7 @@ function Season(props) {
                             <button type="submit" className="favorite save-btn" 
                                 value={data.id} 
                                 id={episode.id}
-                                onClick={e => setData('id', e.target.id)}>
+                                onClick={e => {setData('id', e.target.id); $('#'+episode.id).html("Added")}}>
                                 Seen
                             </button>
                         </form>

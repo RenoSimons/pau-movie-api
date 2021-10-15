@@ -16,6 +16,7 @@ function Show(props) {
     const saveShow = (e) => {
         e.preventDefault()
         post('/show/seasons/showsave')
+        $('.favorite-btn').html("Saved to favorites")
     }
 
     useEffect(() => {
@@ -38,10 +39,10 @@ function Show(props) {
             </div>
             <div className="showCard">
                 <div className="d-md-flex">
-                    <div className="col-md-4">
-                        {showdata.image ? <img className="mt-3" src={showdata.image.medium}></img> : ""}
+                    <div className="col-12 col-md-4">
+                        {showdata.image ? <img src={showdata.image.medium}></img> : ""}
                         <form onSubmit={saveShow}>
-                            <button type="submit" className="search-btn mt-3"
+                            <button type="submit" className="search-btn favorite-btn mt-3"
                                 value={data.id}
                                 id={showdata.id}
                                 onClick={e => setData('id', e.target.id)}>
@@ -49,15 +50,15 @@ function Show(props) {
                             </button>
                         </form>
                     </div>
-                    <div className="col-md-4">
-                        <h2 className="light-card">{showdata.name}</h2>
+                    <div className="col-12 col-md-4">
+                        <h2 className="light-card my-4 m-md-0">{showdata.name}</h2>
                         <p>Language: {showdata.language}</p>
                         <p className="mt-3">Premiered: {showdata.premiered}</p>
                         <p className="mt-3">Ended: {showdata.ended ? showdata.ended : "Not ended yet"}</p>
                         <p className="mt-3">Genres: {showdata.genres.map((genre) => <span> {genre}</span>)}</p>
                         <p className="mt-3">Rating: {showdata.rating.average}</p>
                     </div>
-                    <div className="col-md-4">
+                    <div className="col-12 col-md-4">
                         <span id="summary" value={showdata.summary}></span>
                     </div>
                 </div>
