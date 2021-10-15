@@ -1,5 +1,4 @@
-import React, { useState } from 'react';
-import ReactDOM from 'react-dom';
+import React, { useState, useEffect } from 'react';
 import axios from "axios";
 
 import InputField from '../components/Inputfield';
@@ -7,64 +6,74 @@ import ShowCard from '../components/ShowCard';
 
 function Home(props) {
     let [userInput, setUserInput] = useState("");
+    let [filterInput, setFilterInput] = useState("");
     let [hasError, setHasError] = useState(false);
-    let [results, setResults] = useState();
-    let [hasSearched, setHasSearched] = useState(false);
+    let [results, setResults] = useState([]);
+    let [favorites, setFavorites] = useState(props.favorites);
 
-    const handleSubmit = (e) => {
-        e.preventDefault()
+    useEffect(() => {
+        // On type get the results
+        axios.post('/search', { userInput })
+        .then(response => {
+            setResults(response.data);
+         },
+        (error) => {
+            setHasError(error);
+        });
 
-        //Make call to the api
-        axios.post('http://127.0.0.1:8000/search', { userInput })
-            .then(response => {
-                setResults(response.data);
-                setHasSearched(true);
-                console.log(results)
-            },
-            (error) => {
-                setHasError(error);
-            });
+    }, [userInput]);
+
+    // Filter
+    if (filterInput.length > 0) {
+        favorites = [];
+        props.favorites.map((favorite) => { 
+            if( favorite.name.toLowerCase().includes(filterInput.toLowerCase()) ) {
+                favorites.push(favorite);
+            }
+        })
     }
 
     return (
         <div className="container" id="homepage">
-            <div className="header fc--secondary d-flex align-items-center justify-content-between">
+            <div className="header fc--secondary light-card d-md-flex align-items-center justify-content-between">
                 <div>
-                    <h1 className="m-0">Show finder</h1>
+                    <h3 className="m-0">Show finder</h3>
                 </div>
                 <div>
-                    <form action="#" onSubmit={handleSubmit} className="d-flex align-items-center ml-3">
-                        <InputField onInputUpdated={setUserInput} />
+                    <form action="#" className="d-flex align-items-center ml-md-3 mt-2 mt-md-0">
+                        <InputField onInputUpdated={setUserInput} placeholder="Search for show"/>
                         <button className="search-btn ml-3" type="submit">Search</button>
                     </form>
                 </div>
             </div>
-            <div className="results">
-                {hasSearched ? 
-                    results.length > 0 ?
-                    <div>
-                        <span className="fc--secondary">Search results for '{userInput}':</span>
-                        <ul>
-                            {results.map((result) => {
-                                return (<ShowCard data={result.show}/>)
-                            })}
+            <div className="results" className="my-3">
+                    {results.length > 0 ?
+                        <div>
+                            <span>Search results for '{userInput}':</span>
+                            <ul>
+                                {results.map((result) => {
+                                    return (<ShowCard data={result.show} />)
+                                })}
 
-                        </ul>
-                    </div>
-                    : <h4 className="fc--secondary">No results found...</h4>
-                : ""}
-
+                            </ul>
+                        </div>
+                        : <h4 className="fc--secondary my-5 pl-3">No results found...</h4>
+                    }
                 {hasError ? hasError : ""}
             </div>
             <div className="favorites mt-3">
-                <h1>Your favorite shows</h1>
-                {props.favorites  ? 
-                    <ul>
-                        {props.favorites.map((favorite) => {
-                            return (<ShowCard data={favorite}/>)
+                <div className="d-md-flex align-items-center justify-content-between light-card">
+                    <h3 className='mb-2 mb-md-0'>Your favorite shows</h3>
+                    <InputField onInputUpdated={setFilterInput} placeholder="Filter favorites"/>
+                </div>
+                
+                {favorites ?
+                    <ul className="mt-3">
+                        {favorites.map((favorite) => {
+                            return (<ShowCard data={favorite} />)
                         })}
                     </ul>
-                    : "No favorites yet"
+                    : <span className="my-5">No favorites yet</span> 
                 }
             </div>
         </div>

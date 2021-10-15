@@ -7,7 +7,7 @@ function ShowCard(props) {
         <>
             <li>{props.data.image ? 
                 <Link href={route('show', {id: props.data.id})}>
-                    <img src={props.data.image.medium}></img>
+                    <img className="thumbnail" src={props.data.image.medium}></img>
                 </Link> : ""}
             </li>
         </>

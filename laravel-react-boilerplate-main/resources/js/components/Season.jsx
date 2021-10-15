@@ -21,7 +21,6 @@ function Season(props) {
                 {seasondata.episodes.map((episode, index) => {
                     return <li key={index} className="episode-list-item">
                         <p>{episode.name}</p>
-                        {console.log(episode)}
                         <form onSubmit={saveEpisode}>
                             <button type="submit" className="favorite save-btn" 
                                 value={data.id} 

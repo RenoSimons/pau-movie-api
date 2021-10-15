@@ -2,3 +2,16 @@
     padding: 30px;
     color: var(--color--secondary);
 }
+
+.light-card {
+    padding: 10px;
+    background-color: var(--color--lightdark);
+    border-radius: 10px;
+}
+
+.thumbnail {
+    transition: 0.25s;
+    &:hover {
+        transform: scale(1.1);
+    }
+}

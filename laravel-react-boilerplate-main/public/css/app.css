@@ -29,6 +29,19 @@
   color: var(--color--secondary);
 }
 
+.light-card {
+  padding: 10px;
+  background-color: var(--color--lightdark);
+  border-radius: 10px;
+}
+
+.thumbnail {
+  transition: 0.25s;
+}
+.thumbnail:hover {
+  transform: scale(1.1);
+}
+
 .search-btn {
   background-color: var(--color--secondary);
   border: none;
@@ -72,7 +85,8 @@
 #homepage ul li {
   margin-top: 15px;
 }
-#homepage .header input {
+
+.search-input {
   border-radius: 5px;
   padding: 7.5px;
   border: none;

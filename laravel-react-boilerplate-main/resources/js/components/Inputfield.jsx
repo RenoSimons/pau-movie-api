@@ -1,5 +1,4 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
 
 function InputField(props) {
 
@@ -10,7 +9,7 @@ function InputField(props) {
 
     return (
         <div>
-            <input onChange={inputChange} className="search-input" autoComplete="off" type="text" placeholder="Enter a show" required/>
+            <input onChange={inputChange} className="search-input" autoComplete="off" type="text" placeholder={props.placeholder} required/>
         </div>
     );
 }
